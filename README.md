@@ -1,19 +1,22 @@
-### tap-oracle
+# tap-oracle
+A Singer Tap for Oracle
 
-Tap for Oracle
 
-you must enable supplemental logging before turning on logminer
+
+## Setup
+LogMiner is one of the sync strategies. You must enable supplemental logging before turning on LogMiner in the Oracle database
+```SQL
  begin
  rdsadmin.rdsadmin_util.alter_supplemental_logging(
    p_action => 'ADD');
  end;
-
 
 begin
     rdsadmin.rdsadmin_util.set_configuration(
         name  => 'archivelog retention hours',
         value => '24');
 end;
+```
 
 QL> exec rdsadmin.rdsadmin_util.show_configuration;
 NAME:tracefile retention
